@@ -1,0 +1,53 @@
+.app-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+}
+.app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.app-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: hidden;
+    transition: left 0.3s ease;
+}
+.app-main--sidebar-visible {
+    left: 260px;
+}
+.app-main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: var(--bg-primary);
+    overflow: hidden;
+}
+.app-main-content {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    .app-main {
+        left: 0 !important;
+    }
+}

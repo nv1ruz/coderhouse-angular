@@ -9,6 +9,7 @@ import {
     IUserRenewTokenResponse,
 } from '../interfaces/users-api.interface';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +18,7 @@ export class UsersApiService {
     private base_url_api_movies: string = environment.base_url_api_movies;
     private _user: IUser;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private router: Router) {}
 
     get token(): string {
         return localStorage.getItem('ACCESS_TOKEN');
@@ -25,6 +26,14 @@ export class UsersApiService {
 
     set token(value: string) {
         localStorage.setItem('ACCESS_TOKEN', value);
+    }
+
+    get user(): IUser {
+        return this._user;
+    }
+
+    public removeToken(): void {
+        localStorage.removeItem('ACCESS_TOKEN');
     }
 
     public login(email: string, password: string): Observable<IUserLoginResponse> {
@@ -67,5 +76,10 @@ export class UsersApiService {
             }),
             catchError((error) => of(false))
         );
+    }
+
+    public logout(): void {
+        this.removeToken();
+        this.router.navigateByUrl('/authentication');
     }
 }

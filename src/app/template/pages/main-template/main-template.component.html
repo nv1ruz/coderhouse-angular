@@ -1,0 +1,14 @@
+<div class="app-wrapper light-theme">
+
+    <div class="app">
+        <app-main-sidebar></app-main-sidebar>
+
+        <main class="app-main"[ngClass]="{'app-main--sidebar-visible': this._mainSidebar.visible}">
+            <div class="app-main-content-wrapper">
+                <div class="app-main-content">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

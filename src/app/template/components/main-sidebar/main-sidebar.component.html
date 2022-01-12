@@ -1,0 +1,87 @@
+<div class="sidebar" [ngClass]="{'sidebar--no-visible': !this._mainSidebar.visible}">
+
+    <div class="sidebar-content">
+
+        <div class="sidebar-header">
+            <div class="sidebar-header__image-wrapper">
+                <img class="sidebar-header__image" src="" alt="logo">
+            </div>
+        </div>
+
+        <div class="sidebar-profile">
+            <!-- <div class="sidebar-profile__image-wrapper">
+                <img src="https://azouaoui-med.github.io/angular-pro-sidebar/demo/assets/img/user.jpg" alt="imagen_profile" class="sidebar-profile__image">
+            </div> -->
+            
+            <div class="sidebar-profile-data">
+                <p class="sidebar-profile__name">{{ this._usersApi.user.name }}</p>
+                <p class="sidebar-profile__email">{{ this._usersApi.user.email }}</p>
+            </div>
+
+            <button type="button" class="sidebar-profile__btn-logout" (click)="this._usersApi.logout()">
+                <span class="material-icons-outlined" style="margin-right: 5px; font-size: 18px;">logout</span>Cerrar sesión
+            </button>
+        </div>
+
+        <div class="sidebar-menu">
+            <div class="sidebar-menu-item-wrapper" *ngFor="let item of this._mainSidebar.menu">
+
+                <span class="sidebar-menu-item-header" *ngIf="item.type === 'header'">{{ item.title }}</span>
+
+                <!-- menu item -->
+
+                <ng-container *ngIf="item.link">
+                    <div class="sidebar-menu-item" routerLink="{{ item.link }}" routerLinkActive="sidebar-menu-item--active" [ngClass]="{'sidebar-menu-item--active': item.active}" *ngIf="item.type !== 'header'" (click)="this.toggleMenu(item)">
+                        <div style="display: flex; align-items: center;">
+                            <div class="sidebar-menu-item__icon-wrapper">
+                                <span class="sidebar-menu-item__icon material-icons-outlined">{{ item.icon }}</span>
+                            </div>
+                            <div class="sidebar-menu-item__title-wrapper">
+                                <p class="sidebar-menu-item__title">{{ item.title }}</p>
+                            </div>
+                        </div>
+                        <div *ngIf="item.type === 'dropdown'">
+                            <span class="sidebar-menu-item__icon-row material-icons-outlined" [ngClass]="{'sidebar-menu-item__icon-row--active': item.active}">chevron_right</span>
+                        </div>
+                    </div>
+                </ng-container>
+                
+                <ng-container *ngIf="!item.link">
+                    <div class="sidebar-menu-item" [ngClass]="{'sidebar-menu-item--active': item.active}" *ngIf="item.type !== 'header'" (click)="this.toggleMenu(item)">
+                        <div style="display: flex; align-items: center;">
+                            <div class="sidebar-menu-item__icon-wrapper">
+                                <span class="sidebar-menu-item__icon material-icons-outlined">{{ item.icon }}</span>
+                            </div>
+                            <div class="sidebar-menu-item__title-wrapper">
+                                <p class="sidebar-menu-item__title">{{ item.title }}</p>
+                            </div>
+                        </div>
+                        <div *ngIf="item.type === 'dropdown'">
+                            <span class="sidebar-menu-item__icon-row material-icons-outlined" [ngClass]="{'sidebar-menu-item__icon-row--active': item.active}">chevron_right</span>
+                        </div>
+                    </div>
+                </ng-container>
+                
+                <!-- submenu -->
+
+                <div class="sidebar-submenu" *ngIf="item.type === 'dropdown'" [@slide]="this.getStatusAnimationMenu(item)">
+                    <div class="sidebar-submenu-item-wrapper" *ngFor="let submenu of item.submenus">
+                        <div class="sidebar-submenu-item">
+                            <div class="sidebar-submenu-item__icon-wrapper">
+                                <span class="sidebar-submenu-item__icon material-icons-outlined">circle</span>
+                            </div>
+                            <div class="sidebar-submenu-item__title-wrapper">
+                                <p class="sidebar-submenu-item__title">{{ submenu.title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- end sidebar-menu-item-wrapper -->
+        </div>
+        
+    </div> <!-- end sidebar-content -->
+
+</div> <!-- end sidebar -->
+
+<div class="sidebar-backdrop" [ngClass]="{'sidebar-backdrop--show': this._mainSidebar.visible}" (click)="this._mainSidebar.close()"></div>
