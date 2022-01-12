@@ -30,7 +30,7 @@ export class MainSidebarService {
             icon: 'home',
             active: false,
             type: 'simple',
-            link: 'principal/facturas',
+            link: 'movies',
         },
         {
             title: 'Mis pedidos',

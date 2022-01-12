@@ -10,6 +10,14 @@ const routes: Routes = [
         path: '',
         component: MainTemplateComponent,
         canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'movies',
+                loadChildren: () =>
+                    import('./modules/movies/movies.module').then((m) => m.MoviesModule),
+            },
+            { path: '', pathMatch: 'full', redirectTo: 'movies' },
+        ],
     },
     { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
