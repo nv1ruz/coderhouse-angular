@@ -1,0 +1,27 @@
+<form [formGroup]="formLogin" (submit)="onSubmit()">
+    <div class="form-login-header">
+        <p class="form-title">Iniciar sesión</p>
+    </div>
+    <div class="form-login-body">
+        <div class="form-control-container">
+            <div class="form-control-group mb-10">
+                <p class="form-control-label">Email *</p>
+                <input type="email" class="form-control" formControlName="email">
+                <div class="invalid-feedback" *ngIf="formLogin.get('email')!.touched || formLogin.get('email')?.dirty">
+                    <p *ngIf="formLogin.get('email')!.errors?.required">Es un campo requerido</p>
+                    <p *ngIf="formLogin.get('email')!.errors?.pattern">Por favor introduzca un email válido</p>
+                </div>
+            </div>
+            <div class="form-control-group mb-10">
+                <p class="form-control-label">Contraseña *</p>
+                <input type="password" class="form-control" formControlName="password">
+                <div class="invalid-feedback" *ngIf="formLogin.get('password')!.touched || formLogin.get('password')?.dirty">
+                    <p *ngIf="formLogin.get('password')!.errors?.required">Es un campo requerido</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-login-footer">
+        <button type="submit" class="btn-primary w-100" [disabled]="formLogin.invalid">Ingresar</button>
+    </div>
+</form>

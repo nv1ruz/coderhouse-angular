@@ -1,0 +1,35 @@
+<form [formGroup]="formRegister" (submit)="onSubmit()">
+    <div class="form-register-header">
+        <p class="form-title">Crear cuenta</p>
+    </div>
+    <div class="form-register-body">
+        <div class="form-control-container">
+            <div class="form-control-group mb-10">
+                <p class="form-control-label">Email *</p>
+                <input type="email" class="form-control" formControlName="email">
+                <div class="invalid-feedback" *ngIf="formRegister.get('email')!.touched || formRegister.get('email')?.dirty">
+                    <p *ngIf="formRegister.get('email')!.errors?.required">Es un campo requerido</p>
+                    <p *ngIf="formRegister.get('email')!.errors?.pattern">Por favor introduzca un email válido</p>
+                </div>
+            </div>
+            <div class="form-control-group mb-10">
+                <p class="form-control-label">Contraseña *</p>
+                <input type="password" class="form-control" formControlName="password">
+                <div class="invalid-feedback" *ngIf="formRegister.get('password')!.touched || formRegister.get('password')?.dirty">
+                    <p *ngIf="formRegister.get('password')!.errors?.required">Es un campo requerido</p>
+                </div>
+            </div>
+            <div class="form-control-group mb-10">
+                <p class="form-control-label">Repetir contraseña *</p>
+                <input type="password" class="form-control" formControlName="password2" (input)="handlerPassword()">
+                <div class="invalid-feedback" *ngIf="formRegister.get('password2')!.touched || formRegister.get('password2')?.dirty">
+                    <p *ngIf="formRegister.get('password2')!.errors?.required">Es un campo requerido</p>
+                    <p *ngIf="formRegister.get('password2')!.valid && isWrongPassword">Las contraseñas no coinciden</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-register-footer">
+        <button type="submit" class="btn-primary w-100" [disabled]="formRegister.invalid && !isWrongPassword">Registrarse</button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+.section-login {
+    height: 100vh;
+    align-items: center;
+}
+.space-1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    background-color: #521d1d;
+}
+.space-2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: var(--bg-secondary);
+}
+.message {
+    box-sizing: border-box;
+    padding: 25px;
+    width: 100%;
+}
+.message-title {
+    margin-bottom: 30px;
+    font-size: 3rem;
+    color: #fff;
+    max-width: 10em;
+}
+.form-container {
+    padding: 20px;
+    width: 100%;
+    min-height: 460px;
+}

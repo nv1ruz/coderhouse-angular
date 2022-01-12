@@ -1,0 +1,25 @@
+.form-register-header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.form-register-body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+    min-height: 50px;
+}
+.form-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--txt-primary);
+}
+.form-register-footer {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

@@ -1,0 +1,24 @@
+<section class="row section-login light-theme">
+
+    <div class="col-12 col-md-7 space-1">
+        <div class="message">
+            <h1 class="message-title">Bienvenid@ a <span class="message-title--primary">Coderhouse</span></h1>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-5 space-2">
+        <div class="form-container">
+            <app-tabs [tabs]="tabs" (getTab)="this.tabSelected = $event"></app-tabs>
+
+            <ng-container *ngIf="this.tabSelected && this.tabSelected.id == 1">
+                <app-form-login></app-form-login>
+            </ng-container>
+            
+            <ng-container *ngIf="this.tabSelected && this.tabSelected.id == 2">
+                <app-form-register></app-form-register>
+            </ng-container>
+            
+        </div>
+    </div>
+
+</section>

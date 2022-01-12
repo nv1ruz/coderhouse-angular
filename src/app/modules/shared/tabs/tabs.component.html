@@ -1,0 +1,9 @@
+<div class="tabs mt-20">
+    <ng-container *ngFor="let item of this.tabs">
+        <div class="tab-item"
+            [ngClass]="{'tab-item--active': this.tabId == item.id}" 
+            (click)="this.selectTab(item)">
+            {{ item.name }}
+        </div>
+    </ng-container>
+</div>
