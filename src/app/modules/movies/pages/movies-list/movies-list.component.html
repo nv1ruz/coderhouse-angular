@@ -21,8 +21,16 @@
                     Detalle
                 </button>
                 <button type="button"
-                    class="btn-create w-100">
+                    class="btn-create w-100"
+                    *ngIf="!this.existMovieInCart(movie.id)"
+                    (click)="this.addMovie(movie)">
                     Agregar
+                </button>
+                <button type="button"
+                    class="btn-delete w-100"
+                    *ngIf="this.existMovieInCart(movie.id)"
+                    (click)="this.deleteMovie(movie.id)">
+                    Quitar
                 </button>
             </div>
         </div>

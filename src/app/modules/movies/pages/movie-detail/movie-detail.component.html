@@ -29,10 +29,20 @@
                     (click)="this.goBack()">
                     Volver atras
                 </button>
-                <button type="button"
-                    class="btn-create w-100">
-                    Agregar a carrito
-                </button>
+                <ng-container *ngIf="this.movie">
+                    <button type="button"
+                        class="btn-create w-100"
+                        *ngIf="!this.existMovieInCart(this.movie.id)"
+                        (click)="this.addMovie(movie)">
+                        Agregar a carrito
+                    </button>
+                    <button type="button"
+                        class="btn-delete w-100"
+                        *ngIf="this.existMovieInCart(this.movie.id)"
+                        (click)="this.deleteMovie(this.movie.id)">
+                        Quitar del carrito
+                    </button>
+                </ng-container>
         </div>
     </div>
 </div>

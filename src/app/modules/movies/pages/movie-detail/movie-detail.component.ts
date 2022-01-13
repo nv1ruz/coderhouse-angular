@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IMovie } from 'src/app/data/apis/api-movies/interfaces/movies-api.interface';
 import { MoviesApiService } from 'src/app/data/apis/api-movies/services/movies-api.service';
+import { CartService } from 'src/app/pages/cart/cart.service';
 
 @Component({
     selector: 'app-movie-detail',
@@ -18,7 +19,8 @@ export class MovieDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private _moviesApi: MoviesApiService
+        private _moviesApi: MoviesApiService,
+        private _cart: CartService
     ) {}
 
     ngOnInit(): void {
@@ -48,5 +50,17 @@ export class MovieDetailComponent implements OnInit {
 
     public goBack(): void {
         this.router.navigateByUrl('movies');
+    }
+
+    public addMovie(movie: IMovie): void {
+        this._cart.addProduct(movie.id, movie.title, movie.price);
+    }
+
+    public deleteMovie(movieId: string): void {
+        this._cart.deleteProduct(movieId);
+    }
+
+    public existMovieInCart(movieId: string): boolean {
+        return this._cart.existProduct(movieId);
     }
 }
