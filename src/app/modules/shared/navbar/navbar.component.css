@@ -22,12 +22,12 @@
     color: var(--navbar-btn-txt);
     cursor: pointer;
 }
-.navbar__icono {
+.navbar__icon {
     padding: 13px 17px;
     border-radius: 100%;
     transition: all 0.1s ease-in-out;
 }
-.navbar__btn-sidebar:hover .navbar__icono {
+.navbar__btn-sidebar:hover .navbar__icon {
     color: var(--navbar-btn-txt-hover);
     background: var(--navbar-btn-bg-hover);
     border-radius: 15px;
@@ -35,7 +35,7 @@
 .navbar-item {
     padding: 15px;
 }
-.navbar__titulo {
+.navbar__title {
     font-size: 16px;
     font-weight: 700;
     color: var(--navbar-txt);

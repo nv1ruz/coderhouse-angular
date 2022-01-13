@@ -7,7 +7,7 @@ import { MainSidebarService } from 'src/app/template/services/main-sidebar.servi
     styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-    @Input() titulo: string = 'Coderhouse';
+    @Input() title: string = 'Coderhouse';
 
     constructor(public _mainSidebar: MainSidebarService) {}
 
