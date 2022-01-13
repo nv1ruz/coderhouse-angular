@@ -1,1 +1,30 @@
-<p>movies-list works!</p>
+<app-navbar title="Listado de peliculas"></app-navbar>
+
+<div class="main-page-container">
+    <div class="card-movie-container">
+        <div class="card-movie" *ngFor="let movie of this.movies">
+            <div class="card-movie-body">
+                <div class="card-movie-image-wrapper">
+                    <img class="card-movie__image"
+                        [src]="movie.image"
+                        [alt]="movie.title">
+                </div>
+                <div class="card-movie-data">
+                    <p class="card-movie__name">{{ movie.title }}</p>
+                    <p class="card-movie__description">Año: {{ movie.year }}</p>
+                </div>
+            </div>
+            <div class="card-movie-footer">
+                <button type="button"
+                    class="btn-primary w-100 mr-10"
+                    (click)="this.goToDetail(movie.id)">
+                    Detalle
+                </button>
+                <button type="button"
+                    class="btn-create w-100">
+                    Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

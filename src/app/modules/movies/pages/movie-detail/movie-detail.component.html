@@ -1,1 +1,38 @@
-<p>movie-detail works!</p>
+<app-navbar title="Detalle de pelicula"></app-navbar>
+
+<div class="main-page-container">
+    <div class="movie">
+        <div class="movie-body row">
+            <div class="col-12 col-md-4 p-10" style="box-sizing: border-box;">
+                <div class="movie-image-wrapper">
+                    <img class="movie__image" [src]="this.movie?.image" [alt]="this.movie?.title">
+                </div>
+            </div>
+            <div class="col-12 col-md-8 p-10" style="box-sizing: border-box;">
+                <div class="movie-data">
+                    <p class="movie__title">{{ this.movie?.title }}</p>
+                    <p class="movie__year">{{ this.movie?.year }}</p>
+                </div>
+                <div class="mb-10">
+                    <span class="form-control-label">Precio</span>
+                    <p class="movie__price">${{ this.movie?.price }}</p>
+                </div>
+                <div>
+                    <span class="form-control-label">Descripción</span>
+                    <p class="movie__description" readonly>{{ this.movie?.description }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="movie-footer">
+            <button type="button"
+                    class="btn-secondary w-100 mr-10"
+                    (click)="this.goBack()">
+                    Volver atras
+                </button>
+                <button type="button"
+                    class="btn-create w-100">
+                    Agregar a carrito
+                </button>
+        </div>
+    </div>
+</div>
