@@ -1,0 +1,47 @@
+<app-navbar title="Películas"></app-navbar>
+
+<div class="main-page-container">
+
+    <button class="btn-primary mt-20"
+        (click)="this._newMovieModal.open()">
+        Nueva película
+    </button>
+
+    <div class="table">
+        <div class="table-header card-header row">
+            <div class="table-header__item-1 col-1">#</div>
+            <div class="table-header__item-2 col">Película</div>
+            <div class="table-header__item-3 col">Stock</div>
+            <div class="table-header__item-4 col">Precio</div>
+            <div class="table-header__item-5 col">Acciones</div>
+        </div>
+        <div class="table-body">
+            <ng-container>
+                <div class="table-item row" *ngFor="let movie of this.movies; let i=index">
+                    <div class="col-1">
+                        <span class="txt-primary">{{ i + 1 }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-primary">{{ movie.title }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-secondary">{{ movie.stock }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-secondary">${{ movie.price }}</span>
+                    </div>
+                    <div class="col">
+                        <button type="button" 
+                            class="btn-update d-flex-center"
+                            (click)="this._editMovieModal.open(movie.id)">
+                            Editar
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<app-new-movie-modal *ngIf="this._newMovieModal.visible"></app-new-movie-modal>
+<app-edit-movie-modal *ngIf="this._editMovieModal.visible"></app-edit-movie-modal>

@@ -14,6 +14,45 @@ export interface IMovieResponse {
     method?: string;
 }
 
+export interface IMovieInsertResponse {
+    ok: boolean;
+    message: string;
+    data?: IMovie;
+    path?: string;
+    method?: string;
+}
+
+export interface IMovieInsertData {
+    title: string;
+    description: string;
+    genred: string;
+    year: number;
+    price: number;
+    stock: number;
+    stockMin: number;
+    image: string;
+    isEnabled: boolean;
+}
+export interface IMovieUpdateResponse {
+    ok: boolean;
+    message: string;
+    data?: { updated: boolean };
+    path?: string;
+    method?: string;
+}
+
+export interface IMovieUpdateData {
+    title: string;
+    description: string;
+    genred: string;
+    year: number;
+    price: number;
+    stock: number;
+    stockMin: number;
+    image: string;
+    isEnabled: boolean;
+}
+
 export interface IMovie {
     id?: string;
     title: string;

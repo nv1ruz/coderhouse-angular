@@ -26,6 +26,11 @@ const routes: Routes = [
                 path: 'profile',
                 component: UserProfileComponent,
             },
+            {
+                path: 'admin',
+                loadChildren: () =>
+                    import('./modules/admin/admin.module').then((m) => m.AdminModule),
+            },
             { path: '', pathMatch: 'full', redirectTo: 'movies' },
         ],
     },

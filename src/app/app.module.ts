@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,8 +15,21 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
-    declarations: [AppComponent, MainSidebarComponent, MainTemplateComponent, UserProfileComponent, CartComponent],
-    imports: [BrowserModule, AppRoutingModule, SharedModule, AuthModule, HttpClientModule],
+    declarations: [
+        AppComponent,
+        MainSidebarComponent,
+        MainTemplateComponent,
+        UserProfileComponent,
+        CartComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        SharedModule,
+        AuthModule,
+        HttpClientModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })

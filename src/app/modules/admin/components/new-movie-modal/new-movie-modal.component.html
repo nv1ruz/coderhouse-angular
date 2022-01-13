@@ -1,0 +1,110 @@
+<div class="modal-basic">
+
+    <div class="modal-basic-dialog animated fast zoomIn" [ngClass]="{'zoomOut': !this._newMovieModal.animate}">
+
+        <div class="modal-basic-content">
+
+            <div class="modal-basic-header">
+                <p class="modal-basic-header__title">Nueva película</p>
+                <button type="button" class="modal-basic-header__btn-close" (click)="this._newMovieModal.close()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+
+            <div class="modal-basic-body p-20">
+
+                <div [formGroup]="this.formMovie" class="w-100">
+
+                    <div class="form-control-container d-flex">
+                        <div class="form-control-group mb-5">
+                            <p class="form-control-label">Título *</p>
+                            <input type="text" class="form-control" formControlName="title" required maxlength="130">
+                            <div class="invalid-feedback"*ngIf="this.formMovie.get('title')!.touched">
+                                <span *ngIf="this.formMovie.get('title').errors?.required">Es un campo requerido</span>
+                                <span *ngIf="this.formMovie.get('title').errors?.maxlength">El máximo permitido es 130 caracteres</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-control-container">
+                        <div class="form-control-group">
+                            <p class="form-control-label">Descripción</p>
+                            <textarea cols="30" rows="4" class="form-control" formControlName="description" maxlength="3000"></textarea>
+                            <div class="invalid-feedback">
+                                <span *ngIf="this.formMovie.get('description').errors?.maxlength">El máximo permitido es 3000 caracteres</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-control-container d-flex">
+                        <div class="form-control-group mb-5 mr-10">
+                            <p class="form-control-label">Año *</p>
+                            <input type="number" class="form-control" formControlName="year">
+                            <div class="invalid-feedback"*ngIf="this.formMovie.get('year')!.touched">
+                                <span *ngIf="this.formMovie.get('year').errors?.required">Es un campo requerido</span>
+                            </div>
+                        </div>
+                        <div class="form-control-group mb-5 mr-10">
+                            <p class="form-control-label">Género *</p>
+                            <input type="text" class="form-control" formControlName="genred" maxlength="130">
+                            <div class="invalid-feedback"*ngIf="this.formMovie.get('genred')!.touched">
+                                <span *ngIf="this.formMovie.get('genred').errors?.required">Es un campo requerido</span>
+                                <span *ngIf="this.formMovie.get('genred').errors?.maxlength">El máximo permitido es 130 caracteres</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-control-container d-flex">
+                        <div class="form-control-group mb-5 mr-10">
+                            <p class="form-control-label">Precio *</p>
+                            <input type="number" class="form-control" formControlName="price">
+                            <div class="invalid-feedback"*ngIf="this.formMovie.get('price')!.touched">
+                                <span *ngIf="this.formMovie.get('price').errors?.required">Es un campo requerido</span>
+                            </div>
+                        </div>
+                        <div class="form-control-group mb-5 mr-10">
+                            <p class="form-control-label">Stock *</p>
+                            <input type="number" class="form-control" formControlName="stock">
+                            <div class="invalid-feedback"*ngIf="this.formMovie.get('stock')!.touched">
+                                <span *ngIf="this.formMovie.get('stock').errors?.required">Es un campo requerido</span>
+                            </div>
+                        </div>
+                        <div class="form-control-group mb-5">
+                            <p class="form-control-label">Stock mínimo *</p>
+                            <input type="number" class="form-control" formControlName="stockMin">
+                            <div class="invalid-feedback"*ngIf="this.formMovie.get('stockMin')!.touched">
+                                <span *ngIf="this.formMovie.get('stockMin').errors?.required">Es un campo requerido</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-control-container">
+                        
+                        <div class="form-control-group mb-5">
+                            <p class="form-control-label">URL imagen</p>
+                            <input type="text" class="form-control" formControlName="image" maxlength="300">
+                            <div class="invalid-feedback">
+                                <span *ngIf="this.formMovie.get('image').errors?.maxlength">El máximo permitido es 300 caracteres</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- end modal-basic-body -->
+
+            <div class="modal-basic-footer">
+                <button type="button" class="btn-cancel mr-10" (click)="this._newMovieModal.close()">
+                    Cerrar
+                </button>
+                <button class="btn-create" [disabled]="this.formMovie.invalid" (click)="this.createMovie()">Crear</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-basic-backdrop" (click)="this._newMovieModal.close()"></div>
+
+</div>

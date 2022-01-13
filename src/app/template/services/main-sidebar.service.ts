@@ -46,6 +46,29 @@ export class MainSidebarService {
             type: 'simple',
             link: 'profile',
         },
+        {
+            title: 'Administrador',
+            type: 'header',
+            active: false,
+            icon: '',
+        },
+        {
+            title: 'Panel admin',
+            icon: 'admin_panel_settings',
+            active: false,
+            type: 'dropdown',
+            link: 'admin',
+            submenus: [
+                {
+                    title: 'Peliculas',
+                    link: 'admin/movies',
+                },
+                {
+                    title: 'Compras',
+                    link: '2',
+                },
+            ],
+        },
     ];
 
     constructor() {}
