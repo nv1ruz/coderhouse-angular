@@ -1,0 +1,64 @@
+<app-navbar title="Mi carrito"></app-navbar>
+
+<div class="main-page-container">
+    <div class="cart">
+        <div class="cart-header card-header row">
+            <div class="cart-header__item-1 col-1">#</div>
+            <div class="cart-header__item-2 col">Película</div>
+            <div class="cart-header__item-3 col">Precio</div>
+            <div class="cart-header__item-4 col">Acciones</div>
+        </div>
+            
+        <div class="cart-body">
+            <ng-container *ngIf="this._cart.products.length > 0; else noItems">
+                <div class="cart-item row" *ngFor="let product of this._cart.products; let i=index">
+                    <div class="col-1">
+                        <span class="txt-primary">{{ i + 1 }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-primary">{{ product.title }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-secondary">${{ product.price }}</span>
+                    </div>
+                    <div class="col">
+                        <button type="button" 
+                            class="btn-delete d-flex-center" 
+                            (click)="this._cart.deleteProduct(product.id)">
+                            Quitar
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    
+    <ng-container *ngIf="this._cart.products.length > 0">
+        <div class="cart-data">
+            <div style="padding: 10px 0 20px;">
+                <span class="cart__amount-label">A PAGAR:</span>
+                <span class="cart__amount-value">${{this._cart.amountTotal}}</span>
+            </div>
+            <div>
+                <!-- <button type="button"
+                    class="btn-secondary mr-10"
+                    (click)="this._cart.deleteAllProduct()">
+                    Limpiar carrito
+                </button> -->
+                
+                <button type="button"
+                    class="btn-create --btn-modify"
+                    (click)="this._cart.buy()">
+                    Finalizar compra
+                </button>
+            </div>
+        </div>
+    </ng-container>
+
+</div>
+
+<ng-template #noItems>
+    <div class="cart-item">
+        <p class="txt-off txt-center p-10">El carrito está vacio</p>
+    </div>
+</ng-template>

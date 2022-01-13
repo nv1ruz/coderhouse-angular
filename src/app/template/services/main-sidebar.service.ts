@@ -33,18 +33,18 @@ export class MainSidebarService {
             link: 'movies',
         },
         {
-            title: 'Mis pedidos',
-            icon: 'receipt',
+            title: 'Mi carrito',
+            icon: 'shopping_cart',
             active: false,
             type: 'simple',
-            link: 'principal/carrito',
+            link: 'cart',
         },
         {
             title: 'Mi perfil',
             icon: 'account_circle',
             active: false,
             type: 'simple',
-            link: 'principal/perfil',
+            link: 'profile',
         },
     ];
 

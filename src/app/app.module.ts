@@ -10,9 +10,11 @@ import { AppComponent } from './app.component';
 
 import { MainSidebarComponent } from './template/components/main-sidebar/main-sidebar.component';
 import { MainTemplateComponent } from './template/pages/main-template/main-template.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
-    declarations: [AppComponent, MainSidebarComponent, MainTemplateComponent],
+    declarations: [AppComponent, MainSidebarComponent, MainTemplateComponent, UserProfileComponent, CartComponent],
     imports: [BrowserModule, AppRoutingModule, SharedModule, AuthModule, HttpClientModule],
     providers: [],
     bootstrap: [AppComponent],
