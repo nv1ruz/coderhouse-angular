@@ -19,6 +19,13 @@
                     <p *ngIf="formLogin.get('password')!.errors?.required">Es un campo requerido</p>
                 </div>
             </div>
+            <app-alert
+                class="mb-10"
+                [isVisible]="this.alertIsVisible"
+                [showButtonClose]="true"
+                [type]="this.alertType"
+                [message]="this.alertMessage">
+            </app-alert>
         </div>
     </div>
     <div class="form-login-footer">

@@ -14,6 +14,9 @@ export class FormLoginComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.pattern(this.isEmail)]),
         password: new FormControl('', [Validators.required]),
     });
+    public alertIsVisible: boolean = false;
+    public alertType: 'success' | 'danger' | 'info' | 'warning';
+    public alertMessage: string = '';
 
     constructor(
         private fb: FormBuilder,
@@ -38,6 +41,12 @@ export class FormLoginComponent implements OnInit {
             },
             (err) => {
                 console.error(err);
+                this.alertIsVisible = true;
+                this.alertType = 'danger';
+                this.alertMessage = err.error.message;
+                setTimeout(() => {
+                    this.alertIsVisible = false;
+                }, 4000);
             }
         );
     }
