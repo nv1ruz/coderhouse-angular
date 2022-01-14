@@ -7,9 +7,10 @@ import { SharedModule } from '../shared/shared.module';
 import { CrudMoviesComponent } from './pages/crud-movies/crud-movies.component';
 import { NewMovieModalComponent } from './components/new-movie-modal/new-movie-modal.component';
 import { EditMovieModalComponent } from './components/edit-movie-modal/edit-movie-modal.component';
+import { LastPurchasesComponent } from './pages/last-purchases/last-purchases.component';
 
 @NgModule({
-    declarations: [CrudMoviesComponent, NewMovieModalComponent, EditMovieModalComponent],
+    declarations: [CrudMoviesComponent, NewMovieModalComponent, EditMovieModalComponent, LastPurchasesComponent],
     imports: [CommonModule, AdminRoutingModule, SharedModule, ReactiveFormsModule],
 })
 export class AdminModule {}

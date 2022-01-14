@@ -6,6 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MainTemplateComponent } from './template/pages/main-template/main-template.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { LastCartsComponent } from './pages/last-carts/last-carts.component';
 
 const routes: Routes = [
     {
@@ -21,6 +22,10 @@ const routes: Routes = [
             {
                 path: 'cart',
                 component: CartComponent,
+            },
+            {
+                path: 'last_carts',
+                component: LastCartsComponent,
             },
             {
                 path: 'profile',

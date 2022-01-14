@@ -13,6 +13,7 @@ import { MainSidebarComponent } from './template/components/main-sidebar/main-si
 import { MainTemplateComponent } from './template/pages/main-template/main-template.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { LastCartsComponent } from './pages/last-carts/last-carts.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { CartComponent } from './pages/cart/cart.component';
         MainTemplateComponent,
         UserProfileComponent,
         CartComponent,
+        LastCartsComponent,
     ],
     imports: [
         BrowserModule,

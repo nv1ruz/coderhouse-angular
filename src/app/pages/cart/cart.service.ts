@@ -52,19 +52,19 @@ export class CartService {
 
     public buy(): void {
         const data: {
-            userId: string;
+            user: string;
             cart: {
-                productId: string;
+                product: string;
                 price: number;
             }[];
         } = {
-            userId: this._usersApi.user.id,
+            user: this._usersApi.user.id,
             cart: [],
         };
 
         for (const item of this._products) {
             data.cart.push({
-                productId: item.id,
+                product: item.id,
                 price: item.price,
             });
         }

@@ -40,6 +40,13 @@ export class MainSidebarService {
             link: 'cart',
         },
         {
+            title: 'Mis pedidos',
+            icon: 'receipt',
+            active: false,
+            type: 'simple',
+            link: 'last_carts',
+        },
+        {
             title: 'Mi perfil',
             icon: 'account_circle',
             active: false,
