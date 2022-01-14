@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
+    IMovieDeleteResponse,
     IMovieInsertData,
     IMovieInsertResponse,
     IMovieResponse,
@@ -41,5 +42,11 @@ export class MoviesApiService {
         const url = `${this.base_url_api_movies}/products/${id}`;
 
         return this.http.put<IMovieUpdateResponse>(url, data);
+    }
+
+    public deleteMovie(id: string): Observable<IMovieDeleteResponse> {
+        const url = `${this.base_url_api_movies}/products/${id}`;
+
+        return this.http.delete<IMovieDeleteResponse>(url);
     }
 }

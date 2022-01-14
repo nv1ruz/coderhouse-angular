@@ -17,7 +17,7 @@
         </div>
         <div class="table-body">
             <ng-container>
-                <div class="table-item row" *ngFor="let movie of this.movies; let i=index">
+                <div class="table-item row" *ngFor="let movie of this._crudMovies.movies; let i=index">
                     <div class="col-1">
                         <span class="txt-primary">{{ i + 1 }}</span>
                     </div>

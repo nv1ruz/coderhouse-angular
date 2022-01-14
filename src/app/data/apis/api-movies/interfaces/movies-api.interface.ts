@@ -53,6 +53,14 @@ export interface IMovieUpdateData {
     isEnabled: boolean;
 }
 
+export interface IMovieDeleteResponse {
+    ok: boolean;
+    message: string;
+    data?: { deleted: boolean };
+    path?: string;
+    method?: string;
+}
+
 export interface IMovie {
     id?: string;
     title: string;

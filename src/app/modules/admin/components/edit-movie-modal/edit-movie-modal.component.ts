@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IMovie } from 'src/app/data/apis/api-movies/interfaces/movies-api.interface';
 import { MoviesApiService } from 'src/app/data/apis/api-movies/services/movies-api.service';
+import { CrudMoviesService } from '../../services/crud-movies.service';
 import { EditMovieModalService } from '../../services/edit-movie-modal.service';
 
 @Component({
@@ -22,11 +23,13 @@ export class EditMovieModalComponent implements OnInit {
         stockMin: [0, Validators.required],
         isEnabled: [true, Validators.required],
     });
+    public isDeleteActive: boolean = false;
 
     constructor(
         private fb: FormBuilder,
         public _editMovieModal: EditMovieModalService,
-        private _moviesApi: MoviesApiService
+        private _moviesApi: MoviesApiService,
+        private _crudMovies: CrudMoviesService
     ) {}
 
     ngOnInit(): void {
@@ -62,8 +65,30 @@ export class EditMovieModalComponent implements OnInit {
             .updateMovie(movieId, this.formMovie.value)
             .subscribe((response) => {
                 console.log(response);
-                if (response.ok) this._editMovieModal.close();
+                if (response.ok) {
+                    this._crudMovies.loadMovies();
+                    this._editMovieModal.close();
+                }
                 if (subscription) subscription.unsubscribe();
             });
+    }
+
+    public deleteMovie(): void {
+        this.isDeleteActive = true;
+        setTimeout(() => {
+            this.isDeleteActive = false;
+        }, 3000);
+    }
+
+    public confirmDeleteMovie(): void {
+        const movieId = this.formMovie.controls['id'].value;
+        const subscription = this._moviesApi.deleteMovie(movieId).subscribe((response) => {
+            console.log(response);
+            if (response.ok) {
+                this._crudMovies.loadMovies();
+                this._editMovieModal.close();
+            }
+            if (subscription) subscription.unsubscribe();
+        });
     }
 }

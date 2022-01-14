@@ -95,6 +95,12 @@
             <!-- end modal-basic-body -->
 
             <div class="modal-basic-footer">
+                <button class="btn-delete mr-10" *ngIf="!this.isDeleteActive" (click)="this.deleteMovie()">
+                    Eliminar
+                </button>
+                <button class="btn-delete mr-10" *ngIf="this.isDeleteActive" (click)="this.confirmDeleteMovie()">
+                    Confirmar
+                </button>
                 <button type="button" class="btn-cancel mr-10" (click)="this._editMovieModal.close()">
                     Cerrar
                 </button>
