@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UsersApiService } from 'src/app/data/apis/api-movies/services/users-api.service';
 
 export interface IMenuItem {
     title: string;
@@ -18,7 +19,43 @@ export interface IMenuItem {
 })
 export class MainSidebarService {
     private _visible: boolean = true;
-    private _menu: IMenuItem[] = [
+    private _menuSimple: IMenuItem[] = [
+        {
+            title: 'General',
+            type: 'header',
+            active: false,
+            icon: '',
+        },
+        {
+            title: 'Inicio',
+            icon: 'home',
+            active: false,
+            type: 'simple',
+            link: 'movies',
+        },
+        {
+            title: 'Mi carrito',
+            icon: 'shopping_cart',
+            active: false,
+            type: 'simple',
+            link: 'cart',
+        },
+        {
+            title: 'Mis pedidos',
+            icon: 'receipt',
+            active: false,
+            type: 'simple',
+            link: 'last_carts',
+        },
+        {
+            title: 'Mi perfil',
+            icon: 'account_circle',
+            active: false,
+            type: 'simple',
+            link: 'profile',
+        },
+    ];
+    private _menuAdmin: IMenuItem[] = [
         {
             title: 'General',
             type: 'header',
@@ -60,32 +97,29 @@ export class MainSidebarService {
             icon: '',
         },
         {
-            title: 'Panel admin',
+            title: 'Películas',
             icon: 'admin_panel_settings',
             active: false,
-            type: 'dropdown',
-            link: 'admin',
-            submenus: [
-                {
-                    title: 'Peliculas',
-                    link: 'admin/movies',
-                },
-                {
-                    title: 'Compras',
-                    link: '2',
-                },
-            ],
+            type: 'simple',
+            link: 'admin/movies',
+        },
+        {
+            title: 'Últimas compras',
+            icon: 'admin_panel_settings',
+            active: false,
+            type: 'simple',
+            link: 'admin/last_purchases',
         },
     ];
 
-    constructor() {}
+    constructor(private _usersApi: UsersApiService) {}
 
     get visible(): boolean {
         return this._visible;
     }
 
     get menu(): IMenuItem[] {
-        return this._menu;
+        return this._usersApi.user.isAdmin ? this._menuAdmin : this._menuSimple;
     }
 
     public checkSidebarVisibility(): void {
