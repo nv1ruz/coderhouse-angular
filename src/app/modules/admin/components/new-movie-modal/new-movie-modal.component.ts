@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IMovieInsertData } from 'src/app/data/apis/api-movies/interfaces/movies-api.interface';
 import { MoviesApiService } from 'src/app/data/apis/api-movies/services/movies-api.service';
+import { ToastNotificationService } from 'src/app/modules/shared/toast-notification/toast-notification.service';
 import { CrudMoviesService } from '../../services/crud-movies.service';
 import { NewMovieModalService } from '../../services/new-movie-modal.service';
 
@@ -15,11 +16,11 @@ export class NewMovieModalComponent implements OnInit {
         title: ['', Validators.required],
         description: [''],
         genred: ['', Validators.required],
-        year: [0, Validators.required],
+        year: [null, Validators.required],
         image: [''],
-        price: [0, Validators.required],
-        stock: [0, Validators.required],
-        stockMin: [0, Validators.required],
+        price: [null, Validators.required],
+        stock: [null, Validators.required],
+        stockMin: [null, Validators.required],
         isEnabled: [true, Validators.required],
     });
 
@@ -27,7 +28,8 @@ export class NewMovieModalComponent implements OnInit {
         private fb: FormBuilder,
         public _newMovieModal: NewMovieModalService,
         private _moviesApi: MoviesApiService,
-        private _crudMovies: CrudMoviesService
+        private _crudMovies: CrudMoviesService,
+        private _toastNotification: ToastNotificationService
     ) {}
 
     ngOnInit(): void {}
@@ -39,6 +41,12 @@ export class NewMovieModalComponent implements OnInit {
             if (response.ok) {
                 this._crudMovies.loadMovies();
                 this._newMovieModal.close();
+                this._toastNotification.showNotification({
+                    title: 'Éxito!',
+                    message: 'Película creada correctamente',
+                    type: 'success',
+                    timeout: 7000,
+                });
             }
             if (subscription) subscription.unsubscribe();
         });

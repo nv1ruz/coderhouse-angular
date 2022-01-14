@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IMovie } from 'src/app/data/apis/api-movies/interfaces/movies-api.interface';
 import { MoviesApiService } from 'src/app/data/apis/api-movies/services/movies-api.service';
+import { ToastNotificationService } from 'src/app/modules/shared/toast-notification/toast-notification.service';
 import { CrudMoviesService } from '../../services/crud-movies.service';
 import { EditMovieModalService } from '../../services/edit-movie-modal.service';
 
@@ -29,7 +30,8 @@ export class EditMovieModalComponent implements OnInit {
         private fb: FormBuilder,
         public _editMovieModal: EditMovieModalService,
         private _moviesApi: MoviesApiService,
-        private _crudMovies: CrudMoviesService
+        private _crudMovies: CrudMoviesService,
+        private _toastNotification: ToastNotificationService
     ) {}
 
     ngOnInit(): void {
@@ -68,6 +70,12 @@ export class EditMovieModalComponent implements OnInit {
                 if (response.ok) {
                     this._crudMovies.loadMovies();
                     this._editMovieModal.close();
+                    this._toastNotification.showNotification({
+                        title: 'Éxito!',
+                        message: 'Película actualizada correctamente',
+                        type: 'success',
+                        timeout: 7000,
+                    });
                 }
                 if (subscription) subscription.unsubscribe();
             });
@@ -87,6 +95,12 @@ export class EditMovieModalComponent implements OnInit {
             if (response.ok) {
                 this._crudMovies.loadMovies();
                 this._editMovieModal.close();
+                this._toastNotification.showNotification({
+                    title: 'Éxito!',
+                    message: 'Película eliminada correctamente',
+                    type: 'success',
+                    timeout: 7000,
+                });
             }
             if (subscription) subscription.unsubscribe();
         });

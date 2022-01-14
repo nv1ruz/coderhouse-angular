@@ -1,0 +1,44 @@
+<div class="toast-container">
+    <div *ngFor="let notification of this._toastNotification.notifications; let i = index">
+        <div class="toast animated slideInRight fast row" *ngIf="notification.visible"
+            [ngClass]="{'toast--success-border': notification.type == 'success',
+                        'toast--danger-border' : notification.type == 'danger',
+                        'toast--info-border'   : notification.type == 'info',
+                        'toast--warning-border': notification.type == 'warning',
+                        'slideOutRight'   : notification.animateClose}">
+
+            <!-- icono -->
+
+            <div class="toast__icon-wrapper col-2">
+                <span class="material-icons-outlined toast--success-color" *ngIf="notification.type == 'success'">check_circle</span>
+                <span class="material-icons-outlined toast--danger-color" *ngIf="notification.type == 'danger'">error_outline</span>
+                <span class="material-icons-outlined toast--info-color" *ngIf="notification.type == 'info'">info</span>
+                <span class="material-icons-outlined toast--warning-color" *ngIf="notification.type == 'warning'">report_problem</span>
+            </div>
+
+            <!-- contenido -->
+
+            <div class="toast__content-wrapper col-8">
+                <p class="toast__title"
+                    [ngClass]="{'toast--success-color': notification.type == 'success',
+                                'toast--danger-color': notification.type == 'danger',
+                                'toast--info-color': notification.type == 'info',
+                                'toast--warning-color': notification.type == 'warning'}">
+                    {{ notification.title }}
+                </p>
+                <p class="toast__message">{{ notification.message}}</p>
+            </div>
+
+            <!-- acción -->
+
+            <div class="toast__action-wrapper col-2">
+                <button type="button"
+                        class="toast__action"
+                        (click)="this._toastNotification.hideNotification(i)">
+                        <span class="material-icons">close</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

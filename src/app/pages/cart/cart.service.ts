@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartsApiService } from 'src/app/data/apis/api-movies/services/carts-api.service';
 import { UsersApiService } from 'src/app/data/apis/api-movies/services/users-api.service';
+import { ToastNotificationService } from 'src/app/modules/shared/toast-notification/toast-notification.service';
 
 export interface IProductCart {
     id: string;
@@ -14,7 +15,11 @@ export interface IProductCart {
 export class CartService {
     private _products: IProductCart[] = [];
 
-    constructor(private _usersApi: UsersApiService, private _cartsApi: CartsApiService) {}
+    constructor(
+        private _usersApi: UsersApiService,
+        private _cartsApi: CartsApiService,
+        private _toastNotification: ToastNotificationService
+    ) {}
 
     get products() {
         return this._products;
@@ -33,6 +38,12 @@ export class CartService {
             price: price,
         });
         console.log(this._products);
+        this._toastNotification.showNotification({
+            title: 'Éxito!',
+            message: 'Película agregada al carrito',
+            type: 'success',
+            timeout: 4000,
+        });
     }
 
     public existProduct(id: string): boolean {
@@ -44,6 +55,12 @@ export class CartService {
 
         this._products = this._products.filter((item) => item.id !== id);
         console.log(this._products);
+        this._toastNotification.showNotification({
+            title: 'Éxito!',
+            message: 'Película eliminada del carrito',
+            type: 'success',
+            timeout: 4000,
+        });
     }
 
     public deleteAllProduct(): void {
@@ -73,6 +90,12 @@ export class CartService {
         const subscription = this._cartsApi.addCart(data).subscribe((response) => {
             console.log(response);
             if (response.ok) this.deleteAllProduct();
+            this._toastNotification.showNotification({
+                title: 'Éxito!',
+                message: 'La compra se realizó correctamente',
+                type: 'success',
+                timeout: 7000,
+            });
             if (subscription) subscription.unsubscribe();
         });
     }
