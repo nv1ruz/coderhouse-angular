@@ -1,0 +1,36 @@
+<app-navbar title="Últimos pedidos"></app-navbar>
+
+<div class="main-page-container">
+    <div class="table">
+        <div class="table-header card-header row">
+            <div class="table-header__item-1 col-1">#</div>
+            <div class="table-header__item-2 col">Fecha</div>
+            <div class="table-header__item-3 col">N° películas</div>
+            <div class="table-header__item-4 col">Monto total</div>
+        </div>
+        <div class="table-body">
+            <ng-container *ngIf="this.carts.length > 0; else noItems">
+                <div class="table-item row" *ngFor="let item of this.carts; let i=index">
+                    <div class="col-1">
+                        <span class="txt-primary">{{ i + 1 }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-off">{{ item.createdAt | date: 'dd/MM/yyyy hh:mm' }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-secondary">{{ item.cart.length }}</span>
+                    </div>
+                    <div class="col">
+                        <span class="txt-primary">${{ this.amountTotal(i) }}</span>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<ng-template #noItems>
+    <div class="table-item">
+        <p class="txt-off txt-center p-10">Todavía no realizaste pedidos</p>
+    </div>
+</ng-template>
