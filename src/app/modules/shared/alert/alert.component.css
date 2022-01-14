@@ -1,0 +1,51 @@
+/* 
+    ALERT
+*/
+
+.alert {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: var(--txt-primary);
+    background: var(--bg-secondary);
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert__message {
+    display: flex;
+}
+.alert__button {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    height: 42px;
+    width: 42px;
+    color: inherit;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+}
+.alert--success {
+    color: var(--alert-success-txt);
+    background-color: var(--alert-success-bg);
+    border-color: var(--alert-success-border);
+}
+.alert--danger {
+    color: var(--alert-danger-txt);
+    background-color: var(--alert-danger-bg);
+    border-color: var(--alert-danger-border);
+}
+.alert--info {
+    color: var(--alert-info-txt);
+    background-color: var(--alert-info-bg);
+    border-color: var(--alert-info-border);
+}
+.alert--warning {
+    color: var(--alert-warning-txt);
+    background-color: var(--alert-warning-bg);
+    border-color: var(--alert-warning-border);
+}
