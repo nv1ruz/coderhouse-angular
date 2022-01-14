@@ -7,6 +7,7 @@ import { MainTemplateComponent } from './template/pages/main-template/main-templ
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { LastCartsComponent } from './pages/last-carts/last-carts.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
     {
@@ -33,6 +34,7 @@ const routes: Routes = [
             },
             {
                 path: 'admin',
+                canActivate: [AdminGuard],
                 loadChildren: () =>
                     import('./modules/admin/admin.module').then((m) => m.AdminModule),
             },
