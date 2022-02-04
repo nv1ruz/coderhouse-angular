@@ -14,6 +14,7 @@ import { MainTemplateComponent } from './template/pages/main-template/main-templ
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { LastCartsComponent } from './pages/last-carts/last-carts.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { LastCartsComponent } from './pages/last-carts/last-carts.component';
         SharedModule,
         AuthModule,
         HttpClientModule,
+        StoreModule.forRoot({}, {}),
     ],
     providers: [],
     bootstrap: [AppComponent],
