@@ -12,7 +12,7 @@ export class MovieEffects {
     public loadMovie$ = createEffect(() =>
         this.actions$.pipe(
             ofType(loadMovie),
-            tap((data) => console.log('loadMovie Effect:', data)),
+            // tap((data) => console.log('loadMovie Effect:', data)),
             mergeMap((action) =>
                 this._moviesApi.getMovieById(action.id).pipe(
                     map((response) => loadMovieSuccess({ movie: response.data })),

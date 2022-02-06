@@ -22,7 +22,7 @@ export class UserEffects{
     private effect = createEffect( () => 
         this.actions$.pipe(
             ofType(userActionLogin),
-            tap((data) => console.log('UserEffects.login():', data)),
+            // tap((data) => console.log('UserEffects.login():', data)),
             mergeMap( (action) => 
                 this._usersApi.login(action.email, action.password).pipe(
                     map( (response) => userActionLoginSucces({ user: response.data })),
