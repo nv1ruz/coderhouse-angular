@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UsersApiService } from 'src/app/data/apis/api-movies/services/users-api.service';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { userActionLogin } from 'src/app/store/actions/user.actions';
+import { AppState } from 'src/app/store/app.reducer';
 
 @Component({
     selector: 'app-form-login',
@@ -17,37 +19,33 @@ export class FormLoginComponent implements OnInit {
     public alertIsVisible: boolean = false;
     public alertType: 'success' | 'danger' | 'info' | 'warning';
     public alertMessage: string = '';
+    private userStateSubscription: Subscription;
 
-    constructor(
-        private fb: FormBuilder,
-        private router: Router,
-        private _usersApi: UsersApiService
-    ) {}
+    constructor(private store: Store<AppState>, private fb: FormBuilder) {
+        this.userStateSubscription = this.store.select('user').subscribe((state) => {
+            console.log(state);
+            if (state.hasError) {
+                this.alertIsVisible = true;
+                this.alertType = 'danger';
+                this.alertMessage = state.errorMessage;
+                setTimeout(() => {
+                    this.alertIsVisible = false;
+                }, 4000);
+            }
+        });
+    }
 
     ngOnInit(): void {}
+
+    ngOnDestroy(): void {
+        if (this.userStateSubscription) this.userStateSubscription.unsubscribe();
+    }
 
     public onSubmit(): void {
         console.log('Formulario login: ', this.formLogin.value);
         const email = this.formLogin.controls['email'].value;
         const password = this.formLogin.controls['password'].value;
 
-        const subscription = this._usersApi.login(email, password).subscribe(
-            (response) => {
-                if (response.ok) {
-                    this.router.navigateByUrl('');
-                }
-
-                if (subscription) subscription.unsubscribe();
-            },
-            (err) => {
-                console.error(err);
-                this.alertIsVisible = true;
-                this.alertType = 'danger';
-                this.alertMessage = err.error.message;
-                setTimeout(() => {
-                    this.alertIsVisible = false;
-                }, 4000);
-            }
-        );
+        this.store.dispatch(userActionLogin({ email: email, password: password }));
     }
 }
