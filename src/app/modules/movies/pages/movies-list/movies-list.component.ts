@@ -30,7 +30,7 @@ export class MoviesListComponent implements OnInit {
 
     public loadMovies(): void {
         this.moviesSubscription = this._moviesApi.getMovies().subscribe((response) => {
-            console.log(response);
+            // console.log(response);
             if (response.ok) this.movies = response.data;
         });
     }

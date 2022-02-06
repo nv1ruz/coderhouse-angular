@@ -3,19 +3,17 @@ import { IMovie } from 'src/app/data/apis/api-movies/interfaces/movies-api.inter
 import { loadMovie, loadMovieError, loadMovieSuccess } from '../actions';
 
 export interface IMovieState {
-    id: string;
     movie: IMovie;
-    loaded: boolean;
-    loading: boolean;
-    error: any;
+    isLoading: boolean;
+    hasError: boolean;
+    errorMessage: string;
 }
 
 export const movieInitialState: IMovieState = {
-    id: '',
     movie: null,
-    loaded: false,
-    loading: false,
-    error: null,
+    isLoading: false,
+    hasError: false,
+    errorMessage: '',
 };
 
 export function movieReducer(state = movieInitialState, action: Action) {
@@ -24,22 +22,17 @@ export function movieReducer(state = movieInitialState, action: Action) {
 
 const _movieReducer = createReducer(
     movieInitialState,
-    on(loadMovie, (state, { id }) => ({ ...state, loading: true, id: id })),
+    on(loadMovie, (state, { id }) => ({ ...state, isLoading: true, id: id })),
     on(loadMovieSuccess, (state, { movie }) => ({
         ...state,
-        loading: false,
-        loaded: true,
         movie: { ...movie },
-        error: null,
+        isLoading: false,
+        hasError: false,
     })),
     on(loadMovieError, (state, { payload }) => ({
         ...state,
-        loading: false,
-        loaded: false,
-        error: {
-            url: payload.url,
-            name: payload.name,
-            message: payload.message,
-        },
+        isLoading: false,
+        hasError: true,
+        errorMessage: payload.message,
     }))
 );
