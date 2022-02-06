@@ -1,0 +1,76 @@
+<div class="modal-basic">
+
+    <div class="modal-basic-dialog animated fast zoomIn" [ngClass]="{'zoomOut': !this._purchaseDetailsModal.animate}">
+
+        <div class="modal-basic-content">
+
+            <div class="modal-basic-header">
+                <p class="modal-basic-header__title">Detalles de la compra</p>
+                <button type="button" class="modal-basic-header__btn-close" (click)="this._purchaseDetailsModal.close()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+
+            <div class="modal-basic-body p-20">
+
+                <div class="w-100">
+                    <div class="form-control-container d-flex">
+                        <div class="form-control-group mb-5 mr-5">
+                            <p class="form-control-label">Fecha y hora</p>
+                            <input type="datetime" class="form-control" [value]="this._purchaseDetailsModal.cart.createdAt | date: 'dd/MM/yyyy hh:mm aa'" readonly>
+                        </div>
+                        <div class="form-control-group mb-5">
+                            <p class="form-control-label">Monto total</p>
+                            <input type="text" class="form-control" [value]="'$' + this.amountTotal()" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="form-control-container d-flex">
+                        <div class="form-control-group mb-5 mr-5">
+                            <p class="form-control-label">Usuario</p>
+                            <input type="text" class="form-control" [value]="this._purchaseDetailsModal.cart.user.name" readonly>
+                        </div>
+                        <div class="form-control-group mb-5 mr-5">
+                            <p class="form-control-label">Email</p>
+                            <input type="email" class="form-control" [value]="this._purchaseDetailsModal.cart.user.email" readonly>
+                        </div>
+                    </div>
+    
+                    <div class="table mt-20">
+                        <div class="table-header row">
+                            <div class="table-header__item-1 col-1">#</div>
+                            <div class="table-header__item-2 col">Película</div>
+                            <div class="table-header__item-3 col-3">Precio</div>
+                        </div>
+                        <div class="table-body">
+                            <div class="table-item row" *ngFor="let item of this._purchaseDetailsModal.cart.cart; let i=index">
+                                <div class="col-1">
+                                    <span class="txt-primary">{{ i + 1 }}</span>
+                                </div>
+                                <div class="col">
+                                    <span class="txt-off">{{ item.product.title }}</span>
+                                </div>
+                                <div class="col-3">
+                                    <span class="txt-off">${{ item.product.price }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end modal-basic-body -->
+
+            <div class="modal-basic-footer">
+                <button type="button" class="btn-cancel" (click)="this._purchaseDetailsModal.close()">
+                    Cerrar
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-basic-backdrop" (click)="this._purchaseDetailsModal.close()"></div>
+
+</div>

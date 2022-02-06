@@ -8,6 +8,7 @@
             <div class="table-header__item-3 col">Usuario</div>
             <div class="table-header__item-4 col">N° películas</div>
             <div class="table-header__item-5 col">Monto total</div>
+            <div class="table-header__item-6 col">Accion</div>
         </div>
         <div class="table-body">
             <ng-container *ngIf="this.carts.length > 0; else noItems">
@@ -27,6 +28,13 @@
                     <div class="col">
                         <span class="txt-primary">${{ this.amountTotal(i) }}</span>
                     </div>
+                    <div class="col">
+                        <button type="button" 
+                            class="btn-update d-flex-center"
+                            (click)="this._purchaseDetailsModal.open(item)">
+                            Detalles
+                        </button>
+                    </div>
                 </div>
             </ng-container>
         </div>
@@ -38,3 +46,5 @@
         <p class="txt-off txt-center p-10">No hay compras últimamente</p>
     </div>
 </ng-template>
+
+<app-purchase-details-modal *ngIf="this._purchaseDetailsModal.visible"></app-purchase-details-modal>
