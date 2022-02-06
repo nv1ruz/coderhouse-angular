@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { IMovie } from 'src/app/data/apis/api-movies/interfaces/movies-api.interface';
 import { MoviesApiService } from 'src/app/data/apis/api-movies/services/movies-api.service';
 import { CartService } from 'src/app/pages/cart/cart.service';
+import { loadMovie } from 'src/app/store/actions';
+import { AppState } from 'src/app/store/app.reducer';
 
 @Component({
     selector: 'app-movie-detail',
@@ -17,6 +20,7 @@ export class MovieDetailComponent implements OnInit {
     private movieSubscription: Subscription;
 
     constructor(
+        private store: Store<AppState>,
         private route: ActivatedRoute,
         private router: Router,
         private _moviesApi: MoviesApiService,
@@ -40,12 +44,17 @@ export class MovieDetailComponent implements OnInit {
     }
 
     private loadMovie(): void {
-        this.movieSubscription = this._moviesApi
-            .getMovieById(this.movieId)
-            .subscribe((response) => {
-                console.log(response);
-                if (response.ok) this.movie = response.data;
-            });
+        this.store.select('movie').subscribe((response) => {
+            this.movie = response.movie;
+        });
+
+        this.store.dispatch(loadMovie({ id: this.movieId }));
+        // this.movieSubscription = this._moviesApi
+        //     .getMovieById(this.movieId)
+        //     .subscribe((response) => {
+        //         console.log(response);
+        //         if (response.ok) this.movie = response.data;
+        //     });
     }
 
     public goBack(): void {
