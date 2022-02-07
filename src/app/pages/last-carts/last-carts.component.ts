@@ -28,7 +28,6 @@ export class LastCartsComponent implements OnInit {
         this.cartsSubscription = this._cartsApi
             .getLastCartsByUserId(userId)
             .subscribe((response) => {
-                console.log(response);
                 if (response.ok) this.carts = response.data;
             });
     }

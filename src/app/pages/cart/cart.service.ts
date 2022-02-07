@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartsApiService } from 'src/app/data/apis/api-movies/services/carts-api.service';
 import { UsersApiService } from 'src/app/data/apis/api-movies/services/users-api.service';
 import { ToastNotificationService } from 'src/app/modules/shared/toast-notification/toast-notification.service';
+import Swal from 'sweetalert2';
 
 export interface IProductCart {
     id: string;
@@ -37,7 +38,6 @@ export class CartService {
             title: title,
             price: price,
         });
-        console.log(this._products);
         this._toastNotification.showNotification({
             title: 'Éxito!',
             message: 'Película agregada al carrito',
@@ -54,7 +54,6 @@ export class CartService {
         if (!this.existProduct(id)) return;
 
         this._products = this._products.filter((item) => item.id !== id);
-        console.log(this._products);
         this._toastNotification.showNotification({
             title: 'Éxito!',
             message: 'Película eliminada del carrito',
@@ -65,6 +64,7 @@ export class CartService {
 
     public deleteAllProduct(): void {
         this._products = [];
+        Swal.fire('Carrito vacio', 'Los productos se quitaron con éxito', 'success');
     }
 
     public buy(): void {
@@ -86,16 +86,15 @@ export class CartService {
             });
         }
 
-        console.log(data);
         const subscription = this._cartsApi.addCart(data).subscribe((response) => {
-            console.log(response);
             if (response.ok) this.deleteAllProduct();
-            this._toastNotification.showNotification({
-                title: 'Éxito!',
-                message: 'La compra se realizó correctamente',
-                type: 'success',
-                timeout: 7000,
-            });
+            Swal.fire('Compra realizada', 'La compra se realizó con éxito', 'success');
+            // this._toastNotification.showNotification({
+            //     title: 'Éxito!',
+            //     message: 'La compra se realizó correctamente',
+            //     type: 'success',
+            //     timeout: 7000,
+            // });
             if (subscription) subscription.unsubscribe();
         });
     }
