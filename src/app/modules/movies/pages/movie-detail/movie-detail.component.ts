@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { IMovie } from 'src/app/data/apis/api-movies/interfaces/movies-api.interface';
 import { MoviesApiService } from 'src/app/data/apis/api-movies/services/movies-api.service';
 import { CartService } from 'src/app/pages/cart/cart.service';
-import { loadMovie } from 'src/app/store/actions';
+import { cartActionAddProduct, cartActionDeleteProduct, loadMovie } from 'src/app/store/actions';
 import { AppState } from 'src/app/store/app.reducer';
 
 @Component({
@@ -62,10 +62,14 @@ export class MovieDetailComponent implements OnInit {
     }
 
     public addMovie(movie: IMovie): void {
+        this.store.dispatch(
+            cartActionAddProduct({ id: movie.id, title: movie.title, price: movie.price })
+        );
         this._cart.addProduct(movie.id, movie.title, movie.price);
     }
 
     public deleteMovie(movieId: string): void {
+        this.store.dispatch(cartActionDeleteProduct({ id: movieId }));
         this._cart.deleteProduct(movieId);
     }
 

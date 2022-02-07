@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { CartsApiService } from 'src/app/data/apis/api-movies/services/carts-api.service';
 import { UsersApiService } from 'src/app/data/apis/api-movies/services/users-api.service';
 import { ToastNotificationService } from 'src/app/modules/shared/toast-notification/toast-notification.service';
+import { cartActionDeleteCart } from 'src/app/store/actions';
+import { AppState } from 'src/app/store/app.reducer';
 import Swal from 'sweetalert2';
 
 export interface IProductCart {
@@ -17,6 +20,7 @@ export class CartService {
     private _products: IProductCart[] = [];
 
     constructor(
+        private store: Store<AppState>,
         private _usersApi: UsersApiService,
         private _cartsApi: CartsApiService,
         private _toastNotification: ToastNotificationService
@@ -87,7 +91,10 @@ export class CartService {
         }
 
         const subscription = this._cartsApi.addCart(data).subscribe((response) => {
-            if (response.ok) this.deleteAllProduct();
+            if (response.ok) {
+                this.store.dispatch(cartActionDeleteCart());
+                this.deleteAllProduct();
+            }
             Swal.fire('Compra realizada', 'La compra se realizó con éxito', 'success');
             // this._toastNotification.showNotification({
             //     title: 'Éxito!',
